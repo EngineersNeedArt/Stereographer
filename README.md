@@ -19,7 +19,7 @@ The difficulty of course is how to later share and display the stereo images wit
 
 ### Steroscopic Images
 
-There's not anything magical about the old stereoscopic images. They are precisely 7 inches wide and 3 1/2 inches tall. Both images are 3 inches by 3 inches square. To create a modern version you need merely extract the left and right image pairs from the MPO file and composite them at the correct scale and position.
+There's not anything magical about the old stereoscopic images. The cards are precisely 7 inches wide and 3 1/2 inches tall. Both images on the card (left and right) are 3 inches by 3 inches square. To create a modern version you need merely extract the left and right image pairs from the MPO file and composite them at the correct scale and position.
 
 <p align="center">
 <img width="800" src="https://github.com/EngineersNeedArt/Stereographer/blob/f1b5a393c7fc3da519610bf1de3af8da894ae456/Images/stereocard.jpg">
