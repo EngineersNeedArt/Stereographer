@@ -41,7 +41,7 @@ The final stereoscopic image has two square images but the images coming off the
 
 Additionally I added a Separation slider because I found that on a few occasions I wanted to pan the left and right images independently — closer or further apart. Generally you can leave it at the center tick.
 
-Finally I have a text field that allows you to enter a title or description to display on the final image. I duplicate the description for both left and right images so that you can read it when viewing the final image. (In fact I experimented with making the text appear to float a bit in front of the final image.)
+Finally I have a text field that allows you to enter a title or description to display on the final image. I duplicate the description for both left and right images so that you can read it when viewing the final image in a stereoscopic viewer. (In fact I experimented with making the text appear to float a bit in front of the final image.)
 
 The final image is displayed actual size on your display and I have found I can view them in stereo by placing a stereoscope up to the display of my laptop. For me I am fortunate that without my reading glasses the image needs to be at the end of the full length of my stereoscope. Therefore I can simply place the end of it against the display and it is in focus.
 
