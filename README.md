@@ -15,7 +15,7 @@ I have a FUJIFILM Finepix REAL3D W3 stereo digital camera. They came out in 2010
 
 It's a decent point-and-shoot camera having two separate lenses and sensors to capture images in left and right pairs. The files that it produces are MPO files — more or less a wrapper that allows multiple JPEG images in one file. A nice feature of the camera is a clever lenticular display on the back of the camera that gives you a decent stereo preview of the photos you capture.
 
-The difficulty of course is how to later share and display the stereo images without requiring the camera and it's fancy screen. With no 3D television or VR headset of my own, I prefer to print the images out in pairs to mimic the stereoscopic images on cards you often see in antique stores. While an old fashioned staereoscope is also an unusual device to have sitting around, they're quite a bit more affordable than the aforementioned 3D televisions or VR headsets. And who doesn't like the novelty of stereoscopic vacation photos?
+The difficulty of course is how to later share and display the stereo images without requiring the camera and its fancy screen. With no 3D television or VR headset of my own, I prefer to print the images out in pairs to mimic the stereoscopic images on cards you often see in antique stores. While an old fashioned staereoscope is also an unusual device to have sitting around, they're quite a bit more affordable than the aforementioned 3D televisions or VR headsets. And who doesn't like the novelty of stereoscopic vacation photos?
 
 ### Steroscopic Images
 
