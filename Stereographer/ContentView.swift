@@ -96,11 +96,9 @@ struct ContentView: View {
 		// Save the current graphics state
 		context.saveGState()
 		
-		// Create an attributed string with the text and attributes
-		let attributes: [NSAttributedString.Key: Any] = [
-			.font: NSFont.boldSystemFont (ofSize: 10.0 * outputImageDPI / 72.0),
-			.foregroundColor: color
-		]
+		// Create an attributed string with the text and attributes.
+		let font = NSFont(name: "Times-Bold", size: 10 * outputImageDPI / 72.0) ?? NSFont.boldSystemFont (ofSize: 10.0 * outputImageDPI / 72.0)
+		let attributes: [NSAttributedString.Key: Any] = [.font: font, .foregroundColor: color]
 		let attributedString = NSAttributedString (string: text, attributes: attributes)
 		let textSize = attributedString.size()
 		
@@ -150,16 +148,17 @@ struct ContentView: View {
 		if let maskImage = NSImage (named: NSImage.Name("CardMask")), let maskCGImage = maskImage.cgImage(forProposedRect: nil, context: nil, hints: nil) {
 			context.draw (maskCGImage, in: CGRect (x: 0, y: 0, width: 7.0 * outputImageDPI, height: 3.5 * outputImageDPI))
 		}
-		let xOffset = 0.03
-		let yOffset = -0.03
-		let xSeparation = 0.02
-		drawText (in: context, text: textFieldValue, centeredOn: CGPoint (x: outputImageDPI * (2.0 + xOffset), y: outputImageDPI * (0.17 + yOffset)),
-				color: NSColor.black.withAlphaComponent (0.5))
-		drawText (in: context, text: textFieldValue, centeredOn: CGPoint (x: outputImageDPI * (5.0 + xOffset), y: outputImageDPI * (0.17 + yOffset)),
-				color: NSColor.black.withAlphaComponent(0.5))
-		drawText (in: context, text: textFieldValue, centeredOn: CGPoint (x: outputImageDPI * (2.0 + xSeparation), y: outputImageDPI * 0.17), 
+		let xOffset = 0.015
+		let yOffset = -0.015
+		let xSeparation = 0.005
+		let shadowColor = NSColor.black.withAlphaComponent (0.25)
+		drawText (in: context, text: textFieldValue, centeredOn: CGPoint (x: outputImageDPI * (2.0 + xOffset), y: outputImageDPI * (0.2 + yOffset)),
+				color: shadowColor)
+		drawText (in: context, text: textFieldValue, centeredOn: CGPoint (x: outputImageDPI * (5.0 + xOffset), y: outputImageDPI * (0.2 + yOffset)),
+				color: shadowColor)
+		drawText (in: context, text: textFieldValue, centeredOn: CGPoint (x: outputImageDPI * (2.0 + xSeparation), y: outputImageDPI * 0.2),
 				color: NSColor.white)
-		drawText (in: context, text: textFieldValue, centeredOn: CGPoint (x: outputImageDPI * (5.0 - xSeparation), y: outputImageDPI * 0.17), 
+		drawText (in: context, text: textFieldValue, centeredOn: CGPoint (x: outputImageDPI * (5.0 - xSeparation), y: outputImageDPI * 0.2),
 				color: NSColor.white)
 		
 		// Create an image from the context
@@ -173,16 +172,19 @@ struct ContentView: View {
 	}
 	
 	func stereogram () -> NSImage? {
+		// Get left and right image from the document.
 		guard let srcLeftImage = document.leftImage, let srcRightImage = document.rightImage else {
 			return nil;
 		}
 		
+		// Determine left and right pan values.
 		let aspectScale = Double (aspectDelta (image: srcLeftImage)) / 2.0
 		let minPan = -aspectScale
 		let maxPan = aspectScale
 		let leftPan = min (max ((pan * aspectScale) - (separation * (aspectScale / 2.0)), minPan), maxPan)
 		let rightPan = min (max ((pan * aspectScale) + (separation * (aspectScale / 2.0)), minPan), maxPan)
 		
+		// Create scaled and panned left and right images — then generate the final composite image.
 		if let leftImage = adjustedImage (sourceImage: srcLeftImage, pan: Double(leftPan)),
 				let rightImage = adjustedImage (sourceImage: srcRightImage, pan: Double(rightPan)) {
 			return compositeImage (leftImage: leftImage, rightImage: rightImage)
