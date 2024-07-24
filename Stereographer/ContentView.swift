@@ -275,7 +275,7 @@ struct ContentView: View {
 				.padding()
 
 				VStack {
-					Text("Text Field:")
+					Text("Title:")
 					TextField("Description", text: $textFieldValue)
 						.textFieldStyle(RoundedBorderTextFieldStyle())
 						.frame(minWidth: 300)
