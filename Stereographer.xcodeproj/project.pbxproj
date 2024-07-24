@@ -59,11 +59,11 @@
 		2633A9DE2C4ACFF40089508F /* Stereographer */ = {
 			isa = PBXGroup;
 			children = (
-				2633A9DF2C4ACFF40089508F /* StereographerApp.swift */,
-				26BB6A8B2C4F49C5007F2093 /* StereoDocumentController.swift */,
-				2633A9E12C4ACFF40089508F /* StereoImageDocument.swift */,
 				2633A9E32C4ACFF40089508F /* ContentView.swift */,
 				2633A9F12C4B32B80089508F /* ImageExtractor.swift */,
+				26BB6A8B2C4F49C5007F2093 /* StereoDocumentController.swift */,
+				2633A9DF2C4ACFF40089508F /* StereographerApp.swift */,
+				2633A9E12C4ACFF40089508F /* StereoImageDocument.swift */,
 				2633A9E52C4ACFF50089508F /* Assets.xcassets */,
 				2633A9E72C4ACFF50089508F /* Info.plist */,
 				2633A9E82C4ACFF50089508F /* Stereographer.entitlements */,

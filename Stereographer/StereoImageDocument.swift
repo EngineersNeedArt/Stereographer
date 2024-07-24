@@ -5,6 +5,7 @@
 import SwiftUI
 import UniformTypeIdentifiers
 
+
 struct StereoImageDocument: FileDocument {
 	static var readableContentTypes: [UTType] { [.data] }
 	

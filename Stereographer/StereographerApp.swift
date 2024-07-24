@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+
 @main
 struct MyApp: App {
 	@NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
@@ -30,14 +31,3 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 		}
 	}
 }
-
-//class AppDelegate: NSObject, NSApplicationDelegate {
-//	func applicationDidFinishLaunching(_ aNotification: Notification) {
-//		let documentController = StereoDocumentController()
-//		NSDocumentController.shared = documentController
-//	}
-//	
-//	func applicationWillTerminate(_ aNotification: Notification) {
-//		// Insert code here to tear down your application
-//	}
-//}

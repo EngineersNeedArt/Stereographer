@@ -4,6 +4,8 @@
 
 import AppKit
 import SwiftUI
+import UniformTypeIdentifiers
+
 
 struct ContentView: View {
 	@Binding var document: StereoImageDocument
@@ -209,7 +211,7 @@ struct ContentView: View {
 			// Show the save panel
 			let savePanel = NSSavePanel()
 			savePanel.nameFieldStringValue = textFieldValue
-			savePanel.allowedFileTypes = ["jpg"]
+			savePanel.allowedContentTypes = [UTType.jpeg]
 			savePanel.begin { response in
 				if response == .OK, let url = savePanel.url {
 					// Convert the image to JPEG data with 450 DPI
