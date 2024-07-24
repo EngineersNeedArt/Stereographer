@@ -97,7 +97,10 @@ struct ContentView: View {
 		context.saveGState()
 		
 		// Create an attributed string with the text and attributes.
-		let font = NSFont(name: "Times-Bold", size: 10 * outputImageDPI / 72.0) ?? NSFont.boldSystemFont (ofSize: 10.0 * outputImageDPI / 72.0)
+		var font = NSFont(name: "Times-Bold", size: 10 * outputImageDPI / 72.0) ?? NSFont.boldSystemFont (ofSize: 10.0 * outputImageDPI / 72.0)
+		if (true) {
+			font = NSFont(name: "Times", size: 10 * outputImageDPI / 72.0) ?? NSFont.boldSystemFont (ofSize: 10.0 * outputImageDPI / 72.0)
+		}
 		let attributes: [NSAttributedString.Key: Any] = [.font: font, .foregroundColor: color]
 		let attributedString = NSAttributedString (string: text, attributes: attributes)
 		let textSize = attributedString.size()
@@ -145,21 +148,29 @@ struct ContentView: View {
 		}
 		
 		// Draw mask overlay.
-		if let maskImage = NSImage (named: NSImage.Name("CardMask")), let maskCGImage = maskImage.cgImage(forProposedRect: nil, context: nil, hints: nil) {
+		var maskImage = NSImage.Name("CardMask")
+		if (true) {
+			maskImage = NSImage.Name("CardMaskLight")
+		}
+		if let maskImage = NSImage (named: maskImage), let maskCGImage = maskImage.cgImage(forProposedRect: nil, context: nil, hints: nil) {
 			context.draw (maskCGImage, in: CGRect (x: 0, y: 0, width: 7.0 * outputImageDPI, height: 3.5 * outputImageDPI))
 		}
 		let xOffset = 0.015
 		let yOffset = -0.015
 		let xSeparation = 0.005
+		var textColor = NSColor.white
+		if (true) {
+			textColor = NSColor.black
+		}
 		let shadowColor = NSColor.black.withAlphaComponent (0.25)
 		drawText (in: context, text: textFieldValue, centeredOn: CGPoint (x: outputImageDPI * (2.0 + xOffset), y: outputImageDPI * (0.2 + yOffset)),
 				color: shadowColor)
 		drawText (in: context, text: textFieldValue, centeredOn: CGPoint (x: outputImageDPI * (5.0 + xOffset), y: outputImageDPI * (0.2 + yOffset)),
 				color: shadowColor)
 		drawText (in: context, text: textFieldValue, centeredOn: CGPoint (x: outputImageDPI * (2.0 + xSeparation), y: outputImageDPI * 0.2),
-				color: NSColor.white)
+				color: textColor)
 		drawText (in: context, text: textFieldValue, centeredOn: CGPoint (x: outputImageDPI * (5.0 - xSeparation), y: outputImageDPI * 0.2),
-				color: NSColor.white)
+				color: textColor)
 		
 		// Create an image from the context
 		guard let cgImage = context.makeImage() else {
@@ -197,6 +208,7 @@ struct ContentView: View {
 		if let image = stereogram () {
 			// Show the save panel
 			let savePanel = NSSavePanel()
+			savePanel.nameFieldStringValue = textFieldValue
 			savePanel.allowedFileTypes = ["jpg"]
 			savePanel.begin { response in
 				if response == .OK, let url = savePanel.url {
