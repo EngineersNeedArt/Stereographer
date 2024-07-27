@@ -16,40 +16,37 @@ struct ContentView: View {
 	
 	let outputImageDPI: Double = 450.0
 	
-	func getCurrentDisplayDPI() -> CGFloat {
-		guard let screen = NSScreen.main else { return 72.0 }
+	private func getCurrentDisplayDPI() -> CGFloat {
+		guard let screen = NSScreen.main else {
+			return 72.0
+		}
 		
 		let description = screen.deviceDescription
-		guard let screenNumber = description[NSDeviceDescriptionKey("NSScreenNumber")] as? NSNumber else { return 72.0 }
+		guard let screenNumber = description[NSDeviceDescriptionKey("NSScreenNumber")] as? NSNumber else {
+			return 72.0
+		}
 		
 		let displayID = screenNumber.uint32Value
 		
 		// Get the main display's mode
-		guard let mode = CGDisplayCopyDisplayMode(displayID) else {
+		guard let mode = CGDisplayCopyDisplayMode (displayID) else {
 			return 72.0
 		}
 		
-		// Get the physical size of the display in millimeters
-		let physicalSize = CGDisplayScreenSize(displayID)
-		
-		// Convert mm to inches
+		let physicalSize = CGDisplayScreenSize (displayID)
 		let widthInInches = physicalSize.width / 25.4
-		
-		// Get the pixel width of the display
-		let pixelWidth = CGFloat(mode.pixelWidth)
-		
-		// Calculate DPI
+		let pixelWidth = CGFloat (mode.pixelWidth)
 		let dpi = pixelWidth / widthInInches
 		
 		// Odd scalar I needed for my display.
 		return dpi / 2.0
 	}
 	
-	func aspectDelta (image: NSImage) -> Int {
+	private func aspectDelta (image: NSImage) -> Int {
 		return Int (round (image.size.width - image.size.height))
 	}
 	
-	func adjustedImage (sourceImage: NSImage?, pan: Double) -> NSImage? {
+	private func adjustedImage (sourceImage: NSImage?, pan: Double) -> NSImage? {
 		var finalImage: NSImage?
 		let width = Int (3 * outputImageDPI)
 		let height = Int (3 * outputImageDPI)
@@ -94,14 +91,40 @@ struct ContentView: View {
 		return finalImage
 	}
 	
-	func drawText (in context: CGContext, text: String, centeredOn point: CGPoint, color: NSColor) {
+	private func registerCustomFont () {
+		guard let fontURL = Bundle.main.url (forResource: "SpecialElite", withExtension: "ttf") else {
+			print ("Failed to find font file.")
+			return
+		}
+		
+		let fontDataProvider = CGDataProvider (url: fontURL as CFURL)
+		guard let font = CGFont (fontDataProvider!) else {
+			print ("Failed to create CGFont.")
+			return
+		}
+		
+		var error: Unmanaged<CFError>?
+		if !CTFontManagerRegisterGraphicsFont (font, &error) {
+			let errorDescription = CFErrorCopyDescription (error!.takeRetainedValue ())
+			print ("Failed to register font: \(String(describing: errorDescription))")
+		}
+	}
+	
+	private func customFont (size: CGFloat) -> NSFont? {
+		guard let font = NSFont(name: "Special Elite", size: size) else {
+			print("Failed to create NSFont.")
+			return nil
+		}
+		return font
+	}
+	
+	private func drawText (in context: CGContext, text: String, centeredOn point: CGPoint, color: NSColor) {
 		// Save the current graphics state
 		context.saveGState()
 		
 		// Create an attributed string with the text and attributes.
-		var font = NSFont(name: "Times-Bold", size: 10 * outputImageDPI / 72.0) ?? NSFont.boldSystemFont (ofSize: 10.0 * outputImageDPI / 72.0)
-		if (true) {
-			font = NSFont(name: "Times", size: 10 * outputImageDPI / 72.0) ?? NSFont.boldSystemFont (ofSize: 10.0 * outputImageDPI / 72.0)
+		guard let font = customFont (size: 10 * outputImageDPI / 72.0) else {
+			return
 		}
 		let attributes: [NSAttributedString.Key: Any] = [.font: font, .foregroundColor: color]
 		let attributedString = NSAttributedString (string: text, attributes: attributes)
@@ -121,7 +144,7 @@ struct ContentView: View {
 		context.restoreGState()
 	}
 
-	func compositeImage (leftImage: NSImage, rightImage: NSImage) -> NSImage? {
+	private func compositeImage (leftImage: NSImage, rightImage: NSImage) -> NSImage? {
 		var finalImage: NSImage?
 		let width = Int (outputImageDPI * 7.0)
 		let height = Int (outputImageDPI * 3.5)
@@ -157,12 +180,12 @@ struct ContentView: View {
 		if let maskImage = NSImage (named: maskImage), let maskCGImage = maskImage.cgImage(forProposedRect: nil, context: nil, hints: nil) {
 			context.draw (maskCGImage, in: CGRect (x: 0, y: 0, width: 7.0 * outputImageDPI, height: 3.5 * outputImageDPI))
 		}
-		let xOffset = 0.015
-		let yOffset = -0.015
-		let xSeparation = 0.005
+		let xOffset = -0.003
+		let yOffset = -0.003
+		let xSeparation = -0.003	// 0.005
 		var textColor = NSColor.white
 		if (true) {
-			textColor = NSColor.black
+			textColor = NSColor.black.withAlphaComponent (0.55)
 		}
 		let shadowColor = NSColor.black.withAlphaComponent (0.25)
 		drawText (in: context, text: textFieldValue, centeredOn: CGPoint (x: outputImageDPI * (2.0 + xOffset), y: outputImageDPI * (0.2 + yOffset)),
@@ -184,7 +207,7 @@ struct ContentView: View {
 		return finalImage
 	}
 	
-	func stereogram () -> NSImage? {
+	private func stereogram () -> NSImage? {
 		// Get left and right image from the document.
 		guard let srcLeftImage = document.leftImage, let srcRightImage = document.rightImage else {
 			return nil;
@@ -206,7 +229,7 @@ struct ContentView: View {
 		}
 	}
 	
-	func exportImage() {
+	private func exportImage() {
 		if let image = stereogram () {
 			// Show the save panel
 			let savePanel = NSSavePanel()
@@ -246,6 +269,9 @@ struct ContentView: View {
 				Image(nsImage: stereogramImage)
 					.resizable()
 					.frame(width: 7.0 * dpi, height: 3.5 * dpi)
+					.onAppear {
+						registerCustomFont()
+					}
 			} else {
 				Image("CardMask")
 					.resizable()

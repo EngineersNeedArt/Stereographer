@@ -41,5 +41,11 @@
 			</dict>
 		</dict>
 	</array>
+	<key>ATSApplicationFontsPath</key>
+	<string>Resources</string>
+	<key>Fonts provided by application</key>
+	<array>
+    	<string>SpecialElite.ttf</string>
+	</array>
 </dict>
 </plist>

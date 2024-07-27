@@ -14,6 +14,7 @@
 		2633A9EB2C4ACFF50089508F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2633A9EA2C4ACFF50089508F /* Preview Assets.xcassets */; };
 		2633A9F22C4B32B80089508F /* ImageExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2633A9F12C4B32B80089508F /* ImageExtractor.swift */; };
 		26BB6A8C2C4F49C5007F2093 /* StereoDocumentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BB6A8B2C4F49C5007F2093 /* StereoDocumentController.swift */; };
+		26F8742C2C52975B000B48B7 /* SpecialElite.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 26F8742A2C52975B000B48B7 /* SpecialElite.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +28,7 @@
 		2633A9EA2C4ACFF50089508F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2633A9F12C4B32B80089508F /* ImageExtractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageExtractor.swift; sourceTree = "<group>"; };
 		26BB6A8B2C4F49C5007F2093 /* StereoDocumentController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StereoDocumentController.swift; sourceTree = "<group>"; };
+		26F8742A2C52975B000B48B7 /* SpecialElite.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SpecialElite.ttf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +66,7 @@
 				26BB6A8B2C4F49C5007F2093 /* StereoDocumentController.swift */,
 				2633A9DF2C4ACFF40089508F /* StereographerApp.swift */,
 				2633A9E12C4ACFF40089508F /* StereoImageDocument.swift */,
+				26F8742B2C52975B000B48B7 /* Fonts */,
 				2633A9E52C4ACFF50089508F /* Assets.xcassets */,
 				2633A9E72C4ACFF50089508F /* Info.plist */,
 				2633A9E82C4ACFF50089508F /* Stereographer.entitlements */,
@@ -78,6 +81,14 @@
 				2633A9EA2C4ACFF50089508F /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		26F8742B2C52975B000B48B7 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				26F8742A2C52975B000B48B7 /* SpecialElite.ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -140,6 +151,7 @@
 			files = (
 				2633A9EB2C4ACFF50089508F /* Preview Assets.xcassets in Resources */,
 				2633A9E62C4ACFF50089508F /* Assets.xcassets in Resources */,
+				26F8742C2C52975B000B48B7 /* SpecialElite.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
