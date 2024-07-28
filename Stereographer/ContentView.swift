@@ -12,6 +12,7 @@ struct ContentView: View {
 	
 	@State private var pan: Double = 0
 	@State private var separation: Double = 0
+	@State private var straighten: Double = 0
 	@State private var textFieldValue: String = ""
 	
 	let outputImageDPI: Double = 450.0
@@ -46,20 +47,17 @@ struct ContentView: View {
 		return Int (round (image.size.width - image.size.height))
 	}
 	
-	private func adjustedImage (sourceImage: NSImage?, pan: Double) -> NSImage? {
+	private func adjustedImage (sourceImage: NSImage, pan: Double) -> NSImage? {
 		var finalImage: NSImage?
-		let width = Int (3 * outputImageDPI)
-		let height = Int (3 * outputImageDPI)
+		let outEdge = 3 * outputImageDPI
 		let bitsPerComponent = 8
-		let bytesPerRow = width * 4
+		let bytesPerRow = Int (floor (outEdge) * 4)
 		let colorSpace = CGColorSpaceCreateDeviceRGB()
+		let srcWidth = sourceImage.size.width
+		let srcHeight = sourceImage.size.height
+		let srcEdge = min (srcWidth, srcHeight)
 		
-		guard let unwrappedSourceImage = sourceImage else {
-			print("Param error")
-			return finalImage
-		}
-
-		guard let context = CGContext(data: nil, width: width, height: height, bitsPerComponent: bitsPerComponent,
+		guard let context = CGContext (data: nil, width: Int (floor (outEdge)), height: Int (floor (outEdge)), bitsPerComponent: bitsPerComponent,
 				bytesPerRow: bytesPerRow, space: colorSpace, bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue) else {
 			print("Unable to create context")
 			return finalImage
@@ -67,18 +65,40 @@ struct ContentView: View {
 		
 		// Fill the context with a white background
 		context.setFillColor (NSColor.white.cgColor)
-		context.fill (CGRect (x: 0, y: 0, width: width, height: height))
+		context.fill (CGRect (x: 0, y: 0, width: outEdge, height: outEdge))
 		
-		// Scale
 		context.saveGState()
-		let scale = Double (height) / unwrappedSourceImage.size.height;
-		context.scaleBy (x: scale, y: scale)
+		
+		let rotationAngle = straighten * 0.15
+		
+		// Calculate the scale factor to fill the destination context
+		let straightenScale = 1.0 / (abs (cos (rotationAngle)) + abs (sin (rotationAngle)))
+		let scaleFactor = Double (outEdge) / (srcEdge * straightenScale);
+		
+		// Apply the transformations to the context
+		context.saveGState()
+		
+		// Apply the scaling
+		context.scaleBy(x: scaleFactor, y: scaleFactor)
+		
+		// Move origin to the center of the destination context
+		context.translateBy(x: outEdge / 2 / scaleFactor, y: outEdge / 2 / scaleFactor)
+		
+		// Apply the rotation
+		context.rotate(by: rotationAngle)
+		
+		// Move origin back to the center of the source image
+		context.translateBy(x: -srcEdge / 2, y: -srcEdge / 2)
+		
+		// Allow for pan.
+		let halfDelta = round (Double (aspectDelta (image: sourceImage)) / -2.0)
+		context.translateBy (x: halfDelta + pan, y: 0)
 		
 		// Draw the image into the context
-		let halfDelta = round (Double (aspectDelta (image: unwrappedSourceImage)) / -2.0)
-		if let cgImage = unwrappedSourceImage.cgImage(forProposedRect: nil, context: nil, hints: nil) {
-			context.draw (cgImage, in: CGRect (x: halfDelta + pan, y: 0, width: unwrappedSourceImage.size.width, height: unwrappedSourceImage.size.height))
+		if let cgImage = sourceImage.cgImage (forProposedRect: nil, context: nil, hints: nil) {
+			context.draw (cgImage, in: CGRect (origin: .zero, size: NSSize (width: srcWidth, height: srcHeight)))
 		}
+		
 		context.restoreGState()
 		
 		// Create an image from the context
@@ -87,7 +107,7 @@ struct ContentView: View {
 			return finalImage
 		}
 		
-		finalImage = NSImage(cgImage: cgImage, size: NSSize(width: width, height: height))
+		finalImage = NSImage(cgImage: cgImage, size: NSSize (width: outEdge, height: outEdge))
 		return finalImage
 	}
 	
@@ -295,7 +315,7 @@ struct ContentView: View {
 						)
 				}
 				.padding()
-
+				
 				VStack {
 					Text("Separation")
 					Slider(value: $separation, in: -1...1)
@@ -313,7 +333,25 @@ struct ContentView: View {
 						)
 				}
 				.padding()
-
+				
+				VStack {
+					Text("Straighten")
+					Slider(value: $straighten, in: -1...1)
+						.overlay(
+							GeometryReader { geometry in
+								let tickPosition = geometry.size.width / 2
+								VStack {
+									Spacer()
+									Rectangle()
+										.fill(Color.gray)
+										.frame(width: 2, height: 16)
+										.position(x: tickPosition, y: 20)
+								}
+							}
+						)
+				}
+				.padding()
+				
 				VStack {
 					Text("Title:")
 					TextField("Description", text: $textFieldValue)
