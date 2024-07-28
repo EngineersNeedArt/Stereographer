@@ -237,8 +237,8 @@ struct ContentView: View {
 		let aspectScale = Double (aspectDelta (image: srcLeftImage)) / 2.0
 		let minPan = -aspectScale
 		let maxPan = aspectScale
-		let leftPan = min (max ((pan * aspectScale) - (separation * (aspectScale / 2.0)), minPan), maxPan)
-		let rightPan = min (max ((pan * aspectScale) + (separation * (aspectScale / 2.0)), minPan), maxPan)
+		let leftPan = min (max ((pan * aspectScale) - (separation * (aspectScale / 4.0)), minPan), maxPan)
+		let rightPan = min (max ((pan * aspectScale) + (separation * (aspectScale / 4.0)), minPan), maxPan)
 		
 		// Create scaled and panned left and right images — then generate the final composite image.
 		if let leftImage = adjustedImage (sourceImage: srcLeftImage, pan: Double(leftPan)),
