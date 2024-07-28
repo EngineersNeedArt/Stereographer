@@ -2,7 +2,7 @@
 A tool for generating stereoscopic images (left + right) from MPO files.
 
 <p align="center">
-<img src="https://github.com/EngineersNeedArt/Stereographer/blob/572d7ca045f0e21ae5082b7e72b37fa5fec362fd/Images/StereographerScreenshot.jpg">
+<img src="https://github.com/EngineersNeedArt/Stereographer/blob/7ef33aaeb3eec0ed4a5b14d05de63f627473bfb1/Images/StereographerScreenshot.jpg">
 </p>
 
 ### Camera
