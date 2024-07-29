@@ -37,15 +37,17 @@ When I discovered that CGImage didn't give me the image pairs, I first tried emb
 
 It then displays the left and right images in the ContentView of a window.
 
-The final stereoscopic image has two square images but the images coming off the camera are 3:2 aspect ratio. (For better or worse, you can assume landscape mode always — physically rotating a stereo camera 90 degrees is a fail.) This means that part of your photos are going to be cropped out. For this reason I have a Pan control allowing you to slide both left and right photos until you like the square framing. (Also for this reason you should be mindful when you take the photos to keep your subject within an imaginary square in the center of the image.)
+The final stereoscopic image has two square images but the images coming off the camera are 3:2 aspect ratio. (For better or worse, you can assume landscape mode always — physically rotating a stereo camera 90 degrees is a fail.) This means that part of your photos are going to be cropped out. For this reason I have a **Pan** control allowing you to slide both left and right photos until you like the square framing. (Also for this reason you should be mindful when you take the photos to keep your subject within an imaginary square in the center of the image.)
 
-Additionally I added a Separation slider because I found that on a few occasions I wanted to pan the left and right images independently — closer or further apart. Generally you can leave it at the center tick.
+Additionally I added a **Separation** slider because I found that on a few occasions I wanted to pan the left and right images independently — closer or further apart. Generally you can leave it at the center tick.
+
+A few photos showed I had not held the camera level enough so I added a **Straighten** slider. I gave it a narrow range but you shouldn't really be compensating too much. In order to transform the left and right source images with straighten (some rotation) applied some amount of scaling was needed in order to fully fill the destination frame. The transform order of operations as well as the math to compute the minimal amount of scaling required some AI assistance. In both cases the answers I got from ChatGPT were partial and required some modest tweaking for me to get them correct and playing well together.
 
 Finally I have a text field that allows you to enter a title or description to display on the final image. I duplicate the description for both left and right images so that you can read it when viewing the final image in a stereoscopic viewer. (In fact I experimented with making the text appear to float a bit in front of the final image.)
 
 The final image is displayed actual size on your display and I have found I can view them in stereo by placing a stereoscope up to the display of my laptop. For me I am fortunate that without my reading glasses the image needs to be at the end of the full length of my stereoscope. Therefore I can simply place the end of it against the display and it is in focus.
 
-Clicking the export button will export a JPEG of the final image at high quality and at 450 DPI. If you want to do some post editing you can easily bring this composite image into the photo editing app of your choice and then print to a photo-quality printer.
+Clicking the export button will export a JPEG of the final image at high quality and at 450 DPI. If you want to do some post editing you can easily bring this composite image into the photo editing app of your choice for adjustments and then print to a photo-quality printer.
 
 <p align="center">
 <img width="256" src="https://github.com/EngineersNeedArt/Stereographer/blob/6d2e36ca56ec94be0063d87ca0557ca6e721aaa6/Stereographer/Assets.xcassets/AppIcon.appiconset/Stereographer%20Icon%20(512)%201.png">
