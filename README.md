@@ -7,7 +7,7 @@ A tool for generating stereoscopic images (left + right) from MPO files.
 
 ### Camera
 
-I have a FUJIFILM Finepix REAL3D W3 stereo digital camera. They came out in 2010, probably when the whole 3D television hype was ramping up. Six years later it was discontinued.
+I have a FUJIFILM Finepix REAL3D W3 stereo digital camera. The cameras was released in 2010, probably when the whole 3D television hype was ramping up. Six years later it was discontinued.
 
 <p align="center">
 <img width="400" src="https://github.com/EngineersNeedArt/Stereographer/blob/f1b5a393c7fc3da519610bf1de3af8da894ae456/Images/W3.jpeg">
