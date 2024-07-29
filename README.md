@@ -37,6 +37,8 @@ When I discovered that CGImage didn't give me the image pairs, I first tried emb
 
 It then displays the left and right images in the ContentView of a window.
 
+The description of the photo I display in duplicate — both on the left and right. This way you can read it when viewing the image.
+
 The final stereoscopic image has two square images but the images coming off the camera are 3:2 aspect ratio. (For better or worse, you can assume landscape mode always — physically rotating a stereo camera 90 degrees is a fail.) This means that part of your photos are going to be cropped out. For this reason I have a **Pan** control allowing you to slide both left and right photos until you like the square framing. (Also for this reason you should be mindful when you take the photos to keep your subject within an imaginary square in the center of the image.)
 
 Additionally I added a **Separation** slider because I found that on a few occasions I wanted to pan the left and right images independently — closer or further apart. Generally you can leave it at the center tick.
