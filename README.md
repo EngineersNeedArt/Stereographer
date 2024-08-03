@@ -38,6 +38,8 @@ Needless to say, this application automates the steps above.
 
 You feed it an MPO file and it extracts the image pairs itself internally.
 
+> **Note:** I just tested **Stereographer** using MPO files from a **LUMIX DMC-3D1** digital 3D camera and they work just fine.
+> 
 When I discovered that CGImage didn't give me the image pairs, I first tried embedding **exiftool** in the app and calling it to write the images to a temp directory. After struggling with that a bit I instead switched to a technique I found on **StackOverflow**: manually looking for JPEG tags and then passing the relevant bytes to `NSImage (NSImage(data: ))`. For my MPO files I found six JPEGs embedded — four of them were thumbnails. So a width/height check winnowed them down to the left and right images (fortunately in the expected order).
 
 It then displays the left and right images in the ContentView of a window.
