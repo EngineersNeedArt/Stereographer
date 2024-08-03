@@ -19,13 +19,18 @@ The difficulty of course is how to later share and display the stereo images wit
 
 ### Stereoscopic Images
 
-There's not anything magical about the old stereoscopic images. The cards are precisely 7 inches wide and 3 1/2 inches tall. Both images on the card (left and right) are 3 inches by 3 inches square. To create a modern version you need merely extract the left and right image pairs from the MPO file and composite them at the correct scale and position.
+There's not anything magical about the old stereoscopic images. The cards are precisely 7 inches wide and 3-1/2 inches tall. Both images on the card (left and right) are 3 inches by 3 inches square. To create a modern version you need merely extract the left and right image pairs from the MPO file and composite them at the correct scale and position.
 
 <p align="center">
 <img width="800" src="https://github.com/EngineersNeedArt/Stereographer/blob/f1b5a393c7fc3da519610bf1de3af8da894ae456/Images/stereocard.jpg">
 </p>
 
-One way to do this by hand is to use <a href="https://exiftool.org">exiftool</a> and run a couple of commands that will pull the left image and the right image out of the MPO file. Next you can create a 7" by 3 1/2" document in your paint program of choice (probably go with a minimum of 300 dpi) and place your image pairs in the manner described. You can make a nice mask on a separate layer that has a pair of 3-inch square holes cut out (with perhaps a fancy arch over each image to give it a vintage look) to reveal the images. Be sure you scale the image pairs the same amount, keep them aligned vertically and more or less in sync horizontally. The resulting document you can print to a photo-quality ink jet printer and then cut out and mount to card stock.
+One way to do this by hand is to use <a href="https://exiftool.org">exiftool</a> and run a couple of commands that will pull the left image and the right image out of the MPO file. Next you can create a 7" by 3-1/2" document in your paint program of choice (probably go with a minimum of 300 dpi) and place your image pairs in the manner described. You can make a nice mask on a separate layer that has a pair of 3-inch square holes cut out (with perhaps a fancy arch over each image to give it a vintage look) to reveal the images. Be sure you scale the image pairs the same amount, keep them aligned vertically and more or less in sync horizontally. The resulting document you can print to a photo-quality ink jet printer and then cut out and mount to card stock.
+
+> The **exiftool** commands I usually see:
+> 
+> exiftool -trailer:all= "SOURCE.MPO" -o "DEST_LEFT.JPG"  
+> exiftool "SOURCE.MPO" -mpimage2 -b > "DEST_RIGHT.JPG"  
 
 ### Stereographer
 
@@ -33,7 +38,7 @@ Needless to say, this application automates the steps above.
 
 You feed it an MPO file and it extracts the image pairs itself internally.
 
-When I discovered that CGImage didn't give me the image pairs, I first tried embedding exiftool in the app and calling it to write the images to a temp directory. After struggling with that a bit I instead switched to a technique I found on StackOverflow: manually looking for JPEG tags and then passing the relevant bytes to NSImage (NSImage(data: )). For my MPO files I found six JPEGs embedded — four of them were thumbnails. So a pixel-size check winnowed it down to the left and right images (fortunately in the expected order).
+When I discovered that CGImage didn't give me the image pairs, I first tried embedding **exiftool** in the app and calling it to write the images to a temp directory. After struggling with that a bit I instead switched to a technique I found on **StackOverflow**: manually looking for JPEG tags and then passing the relevant bytes to `NSImage (NSImage(data: ))`. For my MPO files I found six JPEGs embedded — four of them were thumbnails. So a width/height check winnowed them down to the left and right images (fortunately in the expected order).
 
 It then displays the left and right images in the ContentView of a window.
 
@@ -50,6 +55,14 @@ Finally I have a text field that allows you to enter a title or description to d
 The final image is displayed actual size on your display and I have found I can view them in stereo by placing a stereoscope up to the display of my laptop. For me I am fortunate that without my reading glasses the image needs to be at the end of the full length of my stereoscope. Therefore I can simply place the end of it against the display and it is in focus.
 
 Clicking the export button will export a JPEG of the final image at high quality and at 450 DPI. If you want to do some post editing you can easily bring this composite image into the photo editing app of your choice for adjustments and then print to a photo-quality printer.
+
+<p align="center">
+<img width="512" src="https://github.com/EngineersNeedArt/Stereographer/blob/1b710efae96c00c4fa17d07ad088cd743c515d3d/Images/Stereoscope.jpeg">
+</p>
+
+I prefer glossy premium photo paper when printing the stereoscopic cards. For US-letter size paper you can get three cards on a page. After printing I use Super-77 spray adhesive to coat one side of US-letter size card stock (you should be able to find 110# card stock at a local crafts store) and carefully press it against the back of the print. A nice cutter and you can slice the cards up to their final 7" by 3-1/2" size. I also picked up a tool from a craft store that will clip the corners off, rounding them, to give the cards a polished look.
+
+My wife says this is the most AI-icon ever:
 
 <p align="center">
 <img width="256" src="https://github.com/EngineersNeedArt/Stereographer/blob/6d2e36ca56ec94be0063d87ca0557ca6e721aaa6/Stereographer/Assets.xcassets/AppIcon.appiconset/Stereographer%20Icon%20(512)%201.png">
