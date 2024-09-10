@@ -69,5 +69,3 @@ My wife says this is the most AI-icon ever:
 <p align="center">
 <img width="256" src="https://github.com/EngineersNeedArt/Stereographer/blob/6d2e36ca56ec94be0063d87ca0557ca6e721aaa6/Stereographer/Assets.xcassets/AppIcon.appiconset/Stereographer%20Icon%20(512)%201.png">
 </p>
-
-[![justforfunnoreally.dev badge](https://img.shields.io/badge/justforfunnoreally-dev-9ff)](https://justforfunnoreally.dev)
