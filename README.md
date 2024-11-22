@@ -72,6 +72,20 @@ Online, a company called <a href="https://www.berezin.com">Berezin Stereo Photog
 
 Included in this repo is a PDF file called **Stereoscope Parts.pdf** that can be used as a template for laser-cutting parts from 3mm acrylic that you can assemble (with the plastic lenses) into a serviceable stereoscope.
 
+<p align="center">
+<img width="512" src="https://github.com/EngineersNeedArt/Stereographer/blob/13e5e010e994903b1560da54f97f98e9bd237976/Images/diy_stereoscope.jpeg">
+</p>
+
+There are three, 3mm-thick acrylic parts. The bridge holds the two plastic lenses mentioned above. The lenses need to be inserted in a specific orientation. If you look from the edges, you can see that the plastic lenses are thicker along one edge (the lens-part itself is thicker, the rounded, square frame that surrounds the lens is the same thickness all around). That thicker edge needs to be farthest from where your nose would be. (The thinner edge of both lenses should be closest to your nose.)
+
+To begin assembly, I place the bridge piece on a flat surface and drop the plastic lenses in the correct place with the correct orientation. Then I squeeze out a bead of E6000 glue along the perimeter of each lens where it meets the acrylic bridge. Not a lot of glue is needed. And be careful of course to avoid getting glue on the lenses themselves.
+
+When the glue has set up I flip the bridge over (glue side down — since it is uglier) and attach the two legs to the edges of the bridge. It should at this point look just like the photo of the finished stereoscope. Splaying the legs out a bit gives the whole stereoscopic some stability and should allow for a 7" inch wide stereoscopic card to sit beneath, between the legs.
+
+I have some acrylic glue and so carefully used a hypodermic needle to wick some of the glue where the legs and bridge meet. I can no longer break the stereoscope down to store it but it is also not going to fall apart if jostled.
+
+If this seems too daunting, check the aforementioned Berezin, although often out of stock, they may sell similar, already-made steroscopes. Just make sure they work with the standard 7" photo cards if that is what you want to view.
+
 <br>
 
 My wife says this is the most AI-icon ever:
