@@ -64,6 +64,16 @@ Clicking the export button will export a JPEG of the final image at high quality
 
 I prefer glossy premium photo paper when printing the stereoscopic cards. For US-letter size paper you can get three cards on a page. After printing I use Super-77 spray adhesive to coat one side of US-letter size card stock (you should be able to find 110# card stock at a local crafts store) and carefully press it against the back of the print. A nice cutter and you can slice the cards up to their final 7" by 3-1/2" size. I also picked up a tool from a craft store that will clip the corners off, rounding them, to give the cards a polished look.
 
+### DIY Stereoscope
+
+A stereo viewer, like the once-ubiquitous "Holmes style" stereoscope are getting hard to find. Nicer antique versions are getting few and pricey, a company that once sold reasonably priced new stereoscopes appears no longer in business. To that end then I set about to create a substitute of sorts that can fairly easily created.
+
+Online, a company called <a href="https://www.berezin.com">Berezin Stereo Photography</a> sell <a href="https://www.berezin.com/3d/vieweracces.htm">inexpensive plastic lenses</a> (scroll down to "Lenses for Stereoscopes") you can use in a stereoscope you make yourself.
+
+Included in this repo is a PDF file called **Stereoscope Parts.pdf** that can be used as a template for laser-cutting parts from 3mm acrylic that you can assemble (with the plastic lenses) into a serviceable stereoscope.
+
+<br>
+
 My wife says this is the most AI-icon ever:
 
 <p align="center">
